@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FeelDrop - Spill the Feels, Send the Song</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.1.3/hamburgers.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-white text-gray-800">
+    <!-- Header -->
+    <header class="border-b border-black bg-white sticky top-0 z-40">
+      <div
+        class="flex justify-between items-center max-w-3xl mx-auto px-4 py-4"
+      >
+        <a href="/" class="text-xl font-handwriting">FeelDrop</a>
+
+        <!-- Hamburger Button -->
+        <button
+          id="menuToggle"
+          class="hamburger hamburger--elastic sm:hidden"
+          type="button"
+        >
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden sm:flex gap-6 text-sm">
+          <a href="/message" class="py-1">Submit</a>
+          <a href="/browse-message" class="py-1">Browse</a>
+          <a href="#" class="py-1">History</a>
+          <a href="#" class="py-1">Support</a>
+        </nav>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div
+        id="mobileMenu"
+        class="sm:hidden px-4 pb-4 flex-col gap-2 text-sm hidden transition-all"
+      >
+        <a
+          href="/message"
+          class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
+        >
+          <svg
+            class="w-5 h-5 text-blue-500"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M16 12H8m0 0l4-4m-4 4l4 4"
+            />
+          </svg>
+          Submit
+        </a>
+        <a
+          href="/browse-message"
+          class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
+        >
+          <svg
+            class="w-5 h-5 text-green-500"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="2"
+              fill="#d1fae5"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M8 12h8m-4-4v8"
+            />
+          </svg>
+          Browse
+        </a>
+        <a
+          href="#"
+          class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
+        >
+          <svg
+            class="w-5 h-5 text-yellow-500"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 8v4l3 3"
+            />
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="2"
+              fill="#fef9c3"
+            />
+          </svg>
+          History
+        </a>
+        <a
+          href="#"
+          class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
+        >
+          <svg
+            class="w-5 h-5 text-pink-500"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M18.364 5.636l-1.414 1.414A7.975 7.975 0 0012 4a7.975 7.975 0 00-4.95 2.05l-1.414-1.414A9.969 9.969 0 0112 2c2.761 0 5.261 1.12 7.071 2.929z"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M2 12c0-2.761 1.12-5.261 2.929-7.071l1.414 1.414A7.975 7.975 0 004 12c0 2.209.896 4.209 2.343 5.657l-1.414 1.414A9.969 9.969 0 012 12z"
+            />
+          </svg>
+          Support
+        </a>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="text-center py-16">
+      <h2 class="text-3xl md:text-5xl font-handwriting mb-4">
+        spill ur feelings here — <br />
+        let the song do the talking.
+      </h2>
+      <p class="text-gray-600 text-lg mb-8">they’ll get it… maybe.</p>
+    </section>
+
+    <!-- message cards -->
+    <section class="flex justify-center">
+      <div
+        class="bg-white border shadow-lg rounded-[24px] max-w-xl w-full p-8 mt-4"
+      >
+        <h3 class="font-handwriting text-2xl text-center mb-6 text-gray-800">
+          Send ur message secret with song 🎵
+        </h3>
+        <form id="formMenfess" class="space-y-5">
+          <div>
+            <label
+              class="block text-sm font-medium text-gray-700 mb-1"
+              for="to"
+            >
+              To
+            </label>
+            <input
+              id="to"
+              name="to"
+              type="text"
+              placeholder="Enter recipient's name"
+              class="w-full px-4 py-2 rounded-[12px] border border-gray-300 focus:ring-2 focus:ring-blue-200 focus:outline-none transition"
+            />
+          </div>
+          <div>
+            <label
+              class="block text-sm font-medium text-gray-700 mb-1"
+              for="message"
+            >
+              Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows="3"
+              placeholder="Write your message here"
+              class="w-full px-4 py-2 rounded-[12px] border border-gray-300 focus:ring-2 focus:ring-blue-200 focus:outline-none transition resize-none"
+            ></textarea>
+          </div>
+          <div>
+            <label
+              class="block text-sm font-medium text-gray-700 mb-1"
+              for="song"
+            >
+              Lagu
+            </label>
+            <select
+              id="song"
+              name="song"
+              class="select-song w-full px-4 py-2 rounded-[12px] border border-gray-300 focus:ring-2 focus:ring-blue-200 focus:outline-none transition bg-white"
+            >
+              <option value="">Search Song</option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            class="w-full bg-gradient-to-r from-blue-400 to-indigo-500 text-white font-semibold py-2 rounded-[12px] shadow hover:from-blue-500 hover:to-indigo-600 transition"
+          >
+            Kirim Pesan
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <footer class="mt-12 py-6 text-center text-gray-400 text-sm">
+      © 2025 FeelDrop. All rights reserved.
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const menuToggle = document.getElementById("menuToggle");
+        const mobileMenu = document.getElementById("mobileMenu");
+
+        menuToggle.addEventListener("click", () => {
+          mobileMenu.classList.toggle("hidden");
+          menuToggle.classList.toggle("is-active");
+        });
+      });
+    </script>
+
+    <style>
+      /* costum alert */
+      @keyframes fade-in-down {
+        0% {
+          opacity: 0;
+          transform: translateY(-20px) scale(0.98);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      .animate-fade-in-down {
+        animation: fade-in-down 0.5s cubic-bezier(0.4, 2, 0.6, 1) both;
+      }
+      .font-handwriting {
+        font-family: "Patrick Hand", cursive;
+      }
+      .font-handwriting {
+        font-family: "Patrick Hand", cursive;
+      }
+
+      /* Select2 custom style */
+      .select2-container--default .select2-selection--single {
+        border-radius: 12px !important;
+        border-color: #d1d5db !important; /* Tailwind gray-300 */
+        height: 44px !important;
+        padding: 6px 12px !important;
+        font-size: 1rem;
+        background: #fff;
+        transition: border 0.2s;
+        box-shadow: none;
+      }
+      .select2-container--default .select2-selection--single:focus,
+      .select2-container--default
+        .select2-selection--single.select2-selection--focus {
+        border-color: #60a5fa !important; /* Tailwind blue-400 */
+        outline: none;
+        box-shadow: 0 0 0 2px #bfdbfe;
+      }
+      .select2-container--default
+        .select2-selection--single
+        .select2-selection__rendered {
+        color: #374151; /* Tailwind gray-700 */
+        line-height: 30px;
+        padding-left: 0;
+      }
+      .select2-container--default
+        .select2-selection--single
+        .select2-selection__arrow {
+        height: 44px !important;
+        right: 10px;
+      }
+      .select2-dropdown {
+        border-radius: 12px !important;
+        border-color: #d1d5db !important;
+        font-size: 1rem;
+        box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.08);
+        padding-top: 8px;
+        padding-bottom: 8px;
+      }
+      .select2-results__option {
+        padding: 10px 16px;
+        border-radius: 8px;
+        transition: background 0.15s;
+      }
+      .select2-results__option--highlighted {
+        background-color: #e0e7ff !important; /* Tailwind indigo-100 */
+        color: #3730a3 !important; /* Tailwind indigo-800 */
+      }
+      .select2-container--default
+        .select2-selection--single
+        .select2-selection__placeholder {
+        color: #9ca3af; /* Tailwind gray-400 */
+      }
+
+      /* Custom style for Select2 search input */
+      .select2-container .select2-search--dropdown .select2-search__field {
+        border-radius: 8px;
+        border: 1px solid #d1d5db;
+        padding: 8px 12px;
+        font-size: 1rem;
+        outline: none;
+        transition: border 0.2s;
+        margin-bottom: 8px;
+        color: #374151;
+        background: #f9fafb;
+      }
+      .select2-container
+        .select2-search--dropdown
+        .select2-search__field:focus {
+        border-color: #60a5fa;
+        background: #fff;
+      }
+    </style>
+    <style>
+      @keyframes fade-in-down {
+        0% {
+          opacity: 0;
+          transform: translateY(-20px) scale(0.98);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      .animate-fade-in-down {
+        animation: fade-in-down 0.5s cubic-bezier(0.4, 2, 0.6, 1) both;
+      }
+      .font-handwriting {
+        font-family: "Patrick Hand", cursive;
+      }
+      /* Resize hamburger icon */
+      .hamburger {
+        transform: scale(0.75); /* Atur ukuran: 0.75 = 75% */
+        transform-origin: center;
+        margin: 0;
+        padding: 0;
+        line-height: 1;
+      }
+
+      #mobileMenu {
+        transition: all 0.3s ease-in-out;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap"
+    />
+
+    <script>
+      document
+        .getElementById("formMenfess")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const form = e.target;
+          const formData = {
+            to: form.to.value,
+            message: form.message.value,
+            song: form.song.value,
+          };
+
+          try {
+            const res = await fetch("/kirim", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData),
+            });
+
+            if (res.ok) {
+              showSuccessAlert();
+              form.reset(); // kosongkan form setelah kirim
+            } else {
+              alert("❌ Gagal mengirim pesan.");
+            }
+          } catch (err) {
+            console.error(err);
+            alert("❌ Terjadi kesalahan.");
+          }
+        });
+
+      function showSuccessAlert() {
+        const alertHTML = `
+      <div id="notif-alert" class="fixed top-6 left-1/2 -translate-x-1/2 z-50">
+        <div
+          class="flex items-center gap-3 px-6 py-4 rounded-xl shadow-lg bg-white border border-blue-200 animate-fade-in-down"
+        >
+          <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="#dbeafe" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01" />
+          </svg>
+          <div>
+            <span class="block font-semibold text-blue-700 text-base">Berhasil!</span>
+            <span class="block text-gray-600 text-sm">Pesan kamu sudah terkirim 🎉</span>
+          </div>
+          <button onclick="document.getElementById('notif-alert').remove()" class="ml-4 text-gray-400 hover:text-blue-500 transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    `;
+
+        // Masukkan ke body
+        document.body.insertAdjacentHTML("beforeend", alertHTML);
+
+        // Auto hilang setelah 5 detik
+        setTimeout(() => {
+          const notif = document.getElementById("notif-alert");
+          if (notif) notif.remove();
+        }, 5000);
+      }
+    </script>
+
+    <script>
+      $(document).ready(function () {
+        // Step 1: Dapatkan dan tampilkan rekomendasi awal
+        $.get("/spotify/recommendations", function (data) {
+          data.results.forEach(function (song) {
+            const option = new Option(song.text, song.id, false, false);
+            $("#song").append(option);
+          });
+        });
+
+        // Step 2: Inisialisasi Select2 dengan pencarian AJAX
+        $(".select-song").select2({
+          placeholder: "Search Song",
+          allowClear: true,
+          width: "100%",
+          minimumInputLength: 0,
+          ajax: {
+            url: "/spotify/search",
+            dataType: "json",
+            delay: 250,
+            data: function (params) {
+              return { q: params.term };
+            },
+            processResults: function (data) {
+              return {
+                results: data.results,
+              };
+            },
+            cache: true,
+          },
+        });
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const modalHTML = `
+      <div id="alert-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 animate-fade-in-down relative">
+          <div class="flex flex-col items-center text-center">
+            <div class="bg-yellow-100 rounded-full p-3 mb-4">
+              <svg class="w-8 h-8 text-yellow-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" fill="#fef9c3"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01" />
+              </svg>
+            </div>
+            <h2 class="font-handwriting text-2xl text-yellow-700 mb-2">Perhatian!</h2>
+            <p class="text-gray-700 mb-6">
+              Pesan yang sudah <span class="font-semibold text-yellow-700">dikirim</span><br>
+              <span class="font-semibold">tidak dapat dihapus</span>.<br>
+              Pastikan isi pesanmu sudah benar sebelum mengirim!
+            </p>
+            <button onclick="document.getElementById('alert-modal').remove()" class="mt-2 px-6 py-2 rounded-lg bg-yellow-400 hover:bg-yellow-500 text-white font-semibold shadow transition">
+              Saya Mengerti
+            </button>
+          </div>
+          <button onclick="document.getElementById('alert-modal').remove()" class="absolute top-3 right-3 text-gray-400 hover:text-yellow-500 transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    `;
+
+        document.body.insertAdjacentHTML("beforeend", modalHTML);
+      });
+    </script>
+  </body>
+</html>

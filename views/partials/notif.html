@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FeelDrop - Spill the Feels, Send the Song</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-white text-gray-800">
+    <div id="notif-alert" class="fixed top-6 left-1/2 -translate-x-1/2 z-50">
+      <div
+        class="flex items-center gap-3 px-6 py-4 rounded-xl shadow-lg bg-white border border-blue-200 animate-fade-in-down"
+      >
+        <svg
+          class="w-6 h-6 text-blue-500"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="2"
+            fill="#dbeafe"
+          />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 8v4m0 4h.01"
+          />
+        </svg>
+        <div>
+          <span class="block font-semibold text-blue-700 text-base"
+            >Berhasil!</span
+          >
+          <span class="block text-gray-600 text-sm"
+            >Pesan kamu sudah terkirim 🎉</span
+          >
+        </div>
+        <button
+          onclick="document.getElementById('notif-alert').remove()"
+          class="ml-4 text-gray-400 hover:text-blue-500 transition"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <script>
+      setTimeout(() => {
+        const notif = document.getElementById("notif-alert");
+        if (notif) notif.remove();
+      }, 5000);
+    </script>
+    <style>
+      @keyframes fade-in-down {
+        0% {
+          opacity: 0;
+          transform: translateY(-20px) scale(0.98);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      .animate-fade-in-down {
+        animation: fade-in-down 0.5s cubic-bezier(0.4, 2, 0.6, 1) both;
+      }
+      .font-handwriting {
+        font-family: "Patrick Hand", cursive;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap"
+    />
+  </body>
+</html>
