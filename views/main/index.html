@@ -33,8 +33,8 @@
         <nav class="hidden sm:flex gap-6 text-sm">
           <a href="/message" class="py-1">Submit</a>
           <a href="/browse-message" class="py-1">Browse</a>
-          <a href="#" class="py-1">History</a>
-          <a href="#" class="py-1">Support</a>
+          <!-- <a href="#" class="py-1">History</a>
+          <a href="#" class="py-1">Support</a> -->
         </nav>
       </div>
 
@@ -89,7 +89,7 @@
           </svg>
           Browse
         </a>
-        <a
+        <!-- <a
           href="#"
           class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
         >
@@ -139,7 +139,7 @@
             />
           </svg>
           Support
-        </a>
+        </a> -->
       </div>
     </header>
 
@@ -257,7 +257,7 @@
           const res = await fetch("/menfess/limit");
           const data = await res.json();
 
-          // Ambil 20 data terbaru
+          // get 20 data anyar
           const latest20 = data.slice(0, 20);
           const top10 = latest20.slice(0, 10);
           const bottom10 = latest20.slice(10);

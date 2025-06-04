@@ -242,6 +242,29 @@
       });
     </script>
 
+    <script>
+      // Active state untuk navbar
+      document.addEventListener("DOMContentLoaded", function () {
+        // Untuk desktop
+        document.querySelectorAll("nav a").forEach((link) => {
+          if (link.getAttribute("href") === window.location.pathname) {
+            link.classList.add(
+              "font-bold",
+              "text-black",
+              "border-b-2",
+              "border-black"
+            );
+          }
+        });
+        // Untuk mobile
+        document.querySelectorAll("#mobileMenu a").forEach((link) => {
+          if (link.getAttribute("href") === window.location.pathname) {
+            link.classList.add("bg-blue-100", "text-blue-700", "font-bold");
+          }
+        });
+      });
+    </script>
+
     <style>
       .font-handwriting {
         font-family: "Patrick Hand", cursive;

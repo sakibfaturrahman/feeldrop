@@ -78,3 +78,22 @@ exports.DetailMenfess = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch message" });
   }
 };
+
+exports.searchMenfess = async (req, res) => {
+  const query = req.query.to;
+
+  if (!query) {
+    return res.status(400).json({ error: "Parameter 'to' wajib diisi." });
+  }
+
+  try {
+    const results = await Menfess.find({
+      to: { $regex: query, $options: "i" }, // pencarian tidak case-sensitive
+    }).sort({ createdAt: -1 });
+
+    res.json(results);
+  } catch (err) {
+    console.error("❌ Gagal mencari menfess:", err);
+    res.status(500).json({ error: "Terjadi kesalahan saat mencari pesan." });
+  }
+};
