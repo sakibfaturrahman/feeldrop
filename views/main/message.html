@@ -449,9 +449,8 @@
         document.body.insertAdjacentHTML("beforeend", alertHTML);
 
         setTimeout(() => {
-          const notif = document.getElementById("notif-alert");
-          if (notif) notif.remove();
-        }, 5000);
+          window.location.href = "/";
+        }, 3000);
       }
 
       function showErrorAlert(
