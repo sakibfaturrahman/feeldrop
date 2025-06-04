@@ -32,15 +32,15 @@ app.listen(PORT, () => {
 });
 
 // limitasi request untuk menghindari spam
-const menfessLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 menit
-  max: 5, // maksimal 5 permintaan
-  message: {
-    success: false,
-    error: "Terlalu banyak kiriman dari IP ini. Coba lagi nanti.",
-  },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
+// const menfessLimiter = rateLimit({
+//   windowMs: 15 * 60 * 1000, // 15 menit
+//   max: 5, // maksimal 5 permintaan
+//   message: {
+//     success: false,
+//     error: "Terlalu banyak kiriman dari IP ini. Coba lagi nanti.",
+//   },
+//   standardHeaders: true,
+//   legacyHeaders: false,
+// });
 
 module.exports = app; // Export app untuk testing
