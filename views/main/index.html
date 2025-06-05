@@ -11,85 +11,98 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-white text-gray-800">
-    <!-- Header -->
-    <header class="border-b border-black bg-white sticky top-0 z-40">
-      <div
-        class="flex justify-between items-center max-w-3xl mx-auto px-4 py-4"
+    <div class="absolute inset-0 w-full h-full pointer-events-none z-0">
+      <svg
+        class="w-full h-full"
+        viewBox="0 0 1440 900"
+        fill="none"
+        preserveAspectRatio="none"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <a href="/" class="text-xl font-handwriting">FeelDrop</a>
-
-        <!-- Hamburger Button -->
-        <button
-          id="menuToggle"
-          class="hamburger hamburger--elastic sm:hidden"
-          type="button"
+        <rect width="1440" height="900" fill="#f3f4f6" />
+        <path d="M0,400 Q360,500 720,400 T1440,400 V900 H0 Z" fill="#fff" />
+      </svg>
+    </div>
+    <div class="relative z-10">
+      <!-- Header -->
+      <header class="border-b border-black bg-white sticky top-0 z-40">
+        <div
+          class="flex justify-between items-center max-w-3xl mx-auto px-4 py-4"
         >
-          <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-          </span>
-        </button>
+          <a href="/" class="text-xl font-handwriting">FeelDrop</a>
 
-        <!-- Desktop Navigation -->
-        <nav class="hidden sm:flex gap-6 text-sm">
-          <a href="/message" class="py-1">Submit</a>
-          <a href="/browse-message" class="py-1">Browse</a>
-          <!-- <a href="#" class="py-1">History</a>
+          <!-- Hamburger Button -->
+          <button
+            id="menuToggle"
+            class="hamburger hamburger--elastic sm:hidden"
+            type="button"
+          >
+            <span class="hamburger-box">
+              <span class="hamburger-inner"></span>
+            </span>
+          </button>
+
+          <!-- Desktop Navigation -->
+          <nav class="hidden sm:flex gap-6 text-sm">
+            <a href="/message" class="py-1">Submit</a>
+            <a href="/browse-message" class="py-1">Browse</a>
+            <!-- <a href="#" class="py-1">History</a>
           <a href="#" class="py-1">Support</a> -->
-        </nav>
-      </div>
+          </nav>
+        </div>
 
-      <!-- Mobile Menu -->
-      <div
-        id="mobileMenu"
-        class="sm:hidden px-4 pb-4 flex-col gap-2 text-sm hidden transition-all"
-      >
-        <a
-          href="/message"
-          class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
+        <!-- Mobile Menu -->
+        <div
+          id="mobileMenu"
+          class="sm:hidden px-4 pb-4 flex-col gap-2 text-sm hidden transition-all"
         >
-          <svg
-            class="w-5 h-5 text-blue-500"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
+          <a
+            href="/message"
+            class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M16 12H8m0 0l4-4m-4 4l4 4"
-            />
-          </svg>
-          Submit
-        </a>
-        <a
-          href="/browse-message"
-          class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
-        >
-          <svg
-            class="w-5 h-5 text-green-500"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <circle
-              cx="12"
-              cy="12"
-              r="10"
+            <svg
+              class="w-5 h-5 text-blue-500"
+              fill="none"
               stroke="currentColor"
               stroke-width="2"
-              fill="#d1fae5"
-            />
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M8 12h8m-4-4v8"
-            />
-          </svg>
-          Browse
-        </a>
-        <!-- <a
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M16 12H8m0 0l4-4m-4 4l4 4"
+              />
+            </svg>
+            Submit
+          </a>
+          <a
+            href="/browse-message"
+            class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
+          >
+            <svg
+              class="w-5 h-5 text-green-500"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="#d1fae5"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M8 12h8m-4-4v8"
+              />
+            </svg>
+            Browse
+          </a>
+          <!-- <a
           href="#"
           class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
         >
@@ -140,140 +153,205 @@
           </svg>
           Support
         </a> -->
-      </div>
-    </header>
+        </div>
+      </header>
 
-    <!-- Hero -->
-    <section class="text-center py-10 sm:py-16 px-4">
-      <h2 class="text-2xl sm:text-3xl md:text-5xl font-handwriting mb-4">
-        spill ur feelings here — <br />
-        let the song do the talking.
-      </h2>
-      <p class="text-gray-600 text-base sm:text-lg mb-8">
-        they’ll get it… maybe.
-      </p>
-      <div class="flex flex-col sm:flex-row justify-center gap-4">
-        <a
-          href="/message"
-          class="bg-black text-white px-6 py-2 rounded text-base transition-all duration-200 transform hover:scale-105 hover:bg-gray-800 active:scale-95 active:bg-gray-900 shadow"
-        >
-          Tell Your Story
-        </a>
-        <a
-          href="/browse-message"
-          class="border px-6 py-2 rounded flex items-center gap-2 justify-center text-base transition-all duration-200 transform hover:scale-105 hover:bg-blue-50 active:scale-95 active:bg-blue-100 shadow"
-        >
-          Browse the Stories
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-4 w-4"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
+      <!-- Hero -->
+      <section class="text-center py-10 sm:py-16 px-4">
+        <h2 class="text-2xl sm:text-3xl md:text-5xl font-handwriting mb-4">
+          spill ur feelings here — <br />
+          let the song do the talking.
+        </h2>
+        <p class="text-gray-600 text-base sm:text-lg mb-8">
+          they’ll get it… maybe.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a
+            href="/message"
+            class="bg-black text-white px-6 py-2 rounded text-base transition-all duration-200 transform hover:scale-105 hover:bg-gray-800 active:scale-95 active:bg-gray-900 shadow"
           >
-            <path
-              d="M21 21l-4.35-4.35M10 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"
-            ></path>
-          </svg>
-        </a>
-      </div>
-    </section>
-
-    <!-- Features -->
-    <section class="flex justify-center px-2">
-      <div
-        class="grid grid-cols-1 md:grid-cols-3 gap-6 px-2 sm:px-6 py-8 sm:py-10 max-w-4xl w-full"
-      >
-        <div class="p-4 border rounded-[20px] bg-white">
-          <h3 class="font-handwriting text-lg mb-2">Share Your Message</h3>
-          <p class="text-sm text-gray-600">
-            Choose a song and write a heartfelt message...
-          </p>
+            Tell Your Story
+          </a>
+          <a
+            href="/browse-message"
+            class="border px-6 py-2 rounded flex items-center gap-2 justify-center text-base transition-all duration-200 transform hover:scale-105 hover:bg-blue-50 active:scale-95 active:bg-blue-100 shadow"
+          >
+            Browse the Stories
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M21 21l-4.35-4.35M10 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"
+              ></path>
+            </svg>
+          </a>
         </div>
-        <div class="p-4 border rounded-[20px] bg-white">
-          <h3 class="font-handwriting text-lg mb-2">Browse Messages</h3>
-          <p class="text-sm text-gray-600">
-            Find messages that were written for you...
-          </p>
+      </section>
+
+      <!-- Features -->
+      <section class="flex justify-center px-4 sm:px-6 lg:px-8">
+        <div
+          class="grid grid-cols-1 md:grid-cols-3 gap-6 py-10 max-w-6xl w-full"
+        >
+          <!-- Feature: Send Message -->
+          <div
+            class="p-6 bg-white border rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition group text-center"
+          >
+            <div class="flex justify-center mb-4">
+              <div
+                class="bg-pink-100 p-3 rounded-full group-hover:bg-pink-200 transition"
+              >
+                <svg
+                  class="w-6 h-6 text-pink-600 group-hover:text-pink-800"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M2 5a2 2 0 012-2h3.586A2 2 0 0110 4.414L11.414 6H16a2 2 0 012 2v2.586a2 2 0 01-.586 1.414L14 15.414A2 2 0 0112.586 16H4a2 2 0 01-2-2V5z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">
+              Send a Message
+            </h3>
+            <p class="text-sm text-gray-600">
+              Write an anonymous message and pick a meaningful song to go with
+              it.
+            </p>
+          </div>
+
+          <!-- Feature: Explore Messages -->
+          <div
+            class="p-6 bg-white border rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition group text-center"
+          >
+            <div class="flex justify-center mb-4">
+              <div
+                class="bg-yellow-100 p-3 rounded-full group-hover:bg-yellow-200 transition"
+              >
+                <svg
+                  class="w-6 h-6 text-yellow-600 group-hover:text-yellow-800"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M10 3a1 1 0 00-.894.553L7.382 7H3a1 1 0 000 2h3.382l1.724 3.447a1 1 0 00.894.553h4a1 1 0 00.894-.553L16.618 9H19a1 1 0 100-2h-2.382l-1.724-3.447A1 1 0 0014 3h-4z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">
+              Explore Messages
+            </h3>
+            <p class="text-sm text-gray-600">
+              Discover messages shared by others. Who knows—one might be for
+              you!
+            </p>
+          </div>
+
+          <!-- Feature: View Details -->
+          <div
+            class="p-6 bg-white border rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition group text-center"
+          >
+            <div class="flex justify-center mb-4">
+              <div
+                class="bg-blue-100 p-3 rounded-full group-hover:bg-blue-200 transition"
+              >
+                <svg
+                  class="w-6 h-6 text-blue-600 group-hover:text-blue-800"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M12.9 14.32a8.01 8.01 0 001.1-4.32A8 8 0 104 14h1.5a1.5 1.5 0 010 3H4a8 8 0 108.9-2.68zM12 11a1 1 0 11-2 0 1 1 0 012 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">
+              View Full Message
+            </h3>
+            <p class="text-sm text-gray-600">
+              Tap a message card to read it fully and hear the song behind the
+              story.
+            </p>
+          </div>
         </div>
-        <div class="p-4 border rounded-[20px] bg-white">
-          <h3 class="font-handwriting text-lg mb-2">Detail Messages</h3>
-          <p class="text-sm text-gray-600">
-            Tap on any message card to discover the full story...
-          </p>
+      </section>
+
+      <!-- Message Cards -->
+      <section class="px-2 sm:px-6 py-8 sm:py-12 flex justify-center">
+        <div
+          class="bg-white border shadow-md rounded-[20px] max-w-6xl w-full p-4 sm:p-8"
+        >
+          <!-- atas -->
+          <div class="relative overflow-hidden group mb-8">
+            <div
+              id="marqueeTop"
+              class="flex gap-4 animate-marquee whitespace-nowrap will-change-transform group-hover:[animation-play-state:paused]"
+            ></div>
+
+            <div
+              class="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white to-transparent z-10"
+            ></div>
+
+            <div
+              class="pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white to-transparent z-10"
+            ></div>
+          </div>
+
+          <!-- bawah -->
+          <div class="relative overflow-hidden group">
+            <div
+              id="marqueeBottom"
+              class="flex gap-4 animate-marquee-reverse whitespace-nowrap will-change-transform group-hover:[animation-play-state:paused]"
+            ></div>
+
+            <div
+              class="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white to-transparent z-10"
+            ></div>
+
+            <div
+              class="pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white to-transparent z-10"
+            ></div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Message Cards -->
-    <section class="px-2 sm:px-6 py-8 sm:py-12 flex justify-center">
-      <div
-        class="bg-white border shadow-md rounded-[20px] max-w-6xl w-full p-4 sm:p-8"
-      >
-        <!-- atas -->
-        <div class="relative overflow-hidden group">
-          <div
-            id="marqueeTop"
-            class="flex gap-4 animate-marquee whitespace-nowrap will-change-transform group-hover:[animation-play-state:paused]"
-          ></div>
+      <footer class="mt-12 py-6 text-center text-gray-400 text-sm px-2">
+        © 2025 FeelDrop. All rights reserved.
+      </footer>
 
-          <div
-            class="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white to-transparent z-10"
-          ></div>
+      <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-          <div
-            class="pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white to-transparent z-10"
-          ></div>
-        </div>
+      <script>
+        async function loadMenfess() {
+          try {
+            const res = await fetch("/menfess/limit");
+            const data = await res.json();
 
-        <!-- bawah -->
-        <div class="relative overflow-hidden group">
-          <div
-            id="marqueeBottom"
-            class="flex gap-4 animate-marquee-reverse whitespace-nowrap will-change-transform group-hover:[animation-play-state:paused]"
-          ></div>
+            // get 20 data anyar
+            const latest20 = data.slice(0, 20);
+            const top10 = latest20.slice(0, 10);
+            const bottom10 = latest20.slice(10);
 
-          <div
-            class="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white to-transparent z-10"
-          ></div>
+            const topWrapper = document.getElementById("marqueeTop");
+            const bottomWrapper = document.getElementById("marqueeBottom");
 
-          <div
-            class="pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white to-transparent z-10"
-          ></div>
-        </div>
-      </div>
-    </section>
+            topWrapper.innerHTML = "";
+            bottomWrapper.innerHTML = "";
 
-    <footer class="mt-12 py-6 text-center text-gray-400 text-sm px-2">
-      © 2025 FeelDrop. All rights reserved.
-    </footer>
+            const createCard = (item) => {
+              const slide = document.createElement("div");
+              slide.className =
+                "min-w-[300px] sm:min-w-[340px] max-w-[340px] h-[230px] flex-shrink-0 border rounded-[20px] shadow-sm overflow-hidden bg-white flex flex-col";
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-    <script>
-      async function loadMenfess() {
-        try {
-          const res = await fetch("/menfess/limit");
-          const data = await res.json();
-
-          // get 20 data anyar
-          const latest20 = data.slice(0, 20);
-          const top10 = latest20.slice(0, 10);
-          const bottom10 = latest20.slice(10);
-
-          const topWrapper = document.getElementById("marqueeTop");
-          const bottomWrapper = document.getElementById("marqueeBottom");
-
-          topWrapper.innerHTML = "";
-          bottomWrapper.innerHTML = "";
-
-          const createCard = (item) => {
-            const slide = document.createElement("div");
-            slide.className =
-              "min-w-[300px] sm:min-w-[340px] max-w-[340px] h-[230px] flex-shrink-0 border rounded-[20px] shadow-sm overflow-hidden bg-white flex flex-col";
-
-            slide.innerHTML = `
+              slide.innerHTML = `
           <div class="p-4 flex-1 flex flex-col">
             <div class="mb-2">
               <span class="block font-semibold text-sm">To: ${item.to}</span>
@@ -303,98 +381,101 @@
             </a>
           </div>
         `;
-            return slide;
-          };
+              return slide;
+            };
 
-          // looping infinite scroll
-          const topItems = [...top10, ...top10];
-          const bottomItems = [...bottom10, ...bottom10];
+            // looping infinite scroll
+            const topItems = [...top10, ...top10];
+            const bottomItems = [...bottom10, ...bottom10];
 
-          topItems.forEach((item) => topWrapper.appendChild(createCard(item)));
-          bottomItems.forEach((item) =>
-            bottomWrapper.appendChild(createCard(item))
-          );
-        } catch (err) {
-          console.error("❌ Gagal load menfess:", err);
+            topItems.forEach((item) =>
+              topWrapper.appendChild(createCard(item))
+            );
+            bottomItems.forEach((item) =>
+              bottomWrapper.appendChild(createCard(item))
+            );
+          } catch (err) {
+            console.error("❌ Gagal load menfess:", err);
+          }
         }
-      }
 
-      document.addEventListener("DOMContentLoaded", loadMenfess);
-    </script>
+        document.addEventListener("DOMContentLoaded", loadMenfess);
+      </script>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const menuToggle = document.getElementById("menuToggle");
-        const mobileMenu = document.getElementById("mobileMenu");
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const menuToggle = document.getElementById("menuToggle");
+          const mobileMenu = document.getElementById("mobileMenu");
 
-        menuToggle.addEventListener("click", () => {
-          mobileMenu.classList.toggle("hidden");
-          menuToggle.classList.toggle("is-active");
+          menuToggle.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+            menuToggle.classList.toggle("is-active");
+          });
         });
-      });
-    </script>
+      </script>
 
-    <style>
-      .font-handwriting {
-        font-family: "Patrick Hand", cursive;
-      }
-      /* Resize hamburger icon */
-      .hamburger {
-        transform: scale(0.75); /* Atur ukuran: 0.75 = 75% */
-        transform-origin: center;
-        margin: 0;
-        padding: 0;
-        line-height: 1;
-      }
-
-      #mobileMenu {
-        transition: all 0.3s ease-in-out;
-      }
-
-      #marqueeTop,
-      #marqueeBottom {
-        display: flex;
-        width: max-content;
-        animation: marquee 10s linear infinite;
-      }
-
-      @keyframes marquee {
-        0% {
-          transform: translateX(0%);
+      <style>
+        .font-handwriting {
+          font-family: "Patrick Hand", cursive;
         }
-        100% {
-          transform: translateX(-50%);
+        /* Resize hamburger icon */
+        .hamburger {
+          transform: scale(0.75); /* Atur ukuran: 0.75 = 75% */
+          transform-origin: center;
+          margin: 0;
+          padding: 0;
+          line-height: 1;
         }
-      }
 
-      @keyframes marquee-reverse {
-        0% {
-          transform: translateX(-50%);
+        #mobileMenu {
+          transition: all 0.3s ease-in-out;
         }
-        100% {
-          transform: translateX(0%);
+
+        #marqueeTop,
+        #marqueeBottom {
+          display: flex;
+          width: max-content;
+          /* animation: marquee 20 s linear infinite; */
         }
-      }
 
-      .animate-marquee {
-        animation: marquee 20s linear infinite;
-        cursor: pointer;
-      }
-      .animate-marquee-reverse {
-        animation: marquee-reverse 20s linear infinite;
-        cursor: pointer;
-      }
+        @keyframes marquee {
+          0% {
+            transform: translateX(0%);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
 
-      /* Hover pause */
-      .group:hover #marqueeTop,
-      .group:hover #marqueeBottom {
-        animation-play-state: paused;
-      }
-    </style>
+        @keyframes marquee-reverse {
+          0% {
+            transform: translateX(-50%);
+          }
+          100% {
+            transform: translateX(0%);
+          }
+        }
 
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap"
-    />
+        .animate-marquee {
+          animation: marquee 20s linear infinite;
+          cursor: pointer;
+        }
+        .animate-marquee-reverse {
+          animation: marquee-reverse 10s linear infinite;
+          cursor: pointer;
+        }
+
+        /* Hover pause */
+        .group:hover #marqueeTop,
+        .group:hover #marqueeBottom {
+          animation-play-state: paused;
+        }
+      </style>
+
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap"
+      />
+    </div>
   </body>
 </html>

@@ -11,85 +11,97 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-white text-gray-800">
-    <!-- Header -->
-    <header class="border-b border-black bg-white sticky top-0 z-40">
-      <div
-        class="flex justify-between items-center max-w-3xl mx-auto px-4 py-4"
+    <div class="absolute inset-0 w-full h-full pointer-events-none z-0">
+      <svg
+        class="w-full h-full"
+        viewBox="0 0 1440 900"
+        fill="none"
+        preserveAspectRatio="none"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <a href="/" class="text-xl font-handwriting">FeelDrop</a>
-
-        <!-- Hamburger Button -->
-        <button
-          id="menuToggle"
-          class="hamburger hamburger--elastic sm:hidden"
-          type="button"
+        <rect width="1440" height="900" fill="#f3f4f6" />
+        <path d="M0,400 Q360,500 720,400 T1440,400 V900 H0 Z" fill="#fff" />
+      </svg>
+    </div>
+    <div class="relative z-10">
+      <header class="border-b border-black bg-white sticky top-0 z-40">
+        <div
+          class="flex justify-between items-center max-w-3xl mx-auto px-4 py-4"
         >
-          <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-          </span>
-        </button>
+          <a href="/" class="text-xl font-handwriting">FeelDrop</a>
 
-        <!-- Desktop Navigation -->
-        <nav class="hidden sm:flex gap-6 text-sm">
-          <a href="/message" class="py-1">Submit</a>
-          <a href="/browse-message" class="py-1">Browse</a>
-          <!-- <a href="#" class="py-1">History</a>
+          <!-- Hamburger Button -->
+          <button
+            id="menuToggle"
+            class="hamburger hamburger--elastic sm:hidden"
+            type="button"
+          >
+            <span class="hamburger-box">
+              <span class="hamburger-inner"></span>
+            </span>
+          </button>
+
+          <!-- Desktop Navigation -->
+          <nav class="hidden sm:flex gap-6 text-sm">
+            <a href="/message" class="py-1">Submit</a>
+            <a href="/browse-message" class="py-1">Browse</a>
+            <!-- <a href="#" class="py-1">History</a>
           <a href="#" class="py-1">Support</a> -->
-        </nav>
-      </div>
+          </nav>
+        </div>
 
-      <!-- Mobile Menu -->
-      <div
-        id="mobileMenu"
-        class="sm:hidden px-4 pb-4 flex-col gap-2 text-sm hidden transition-all"
-      >
-        <a
-          href="/message"
-          class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
+        <!-- Mobile Menu -->
+        <div
+          id="mobileMenu"
+          class="sm:hidden px-4 pb-4 flex-col gap-2 text-sm hidden transition-all"
         >
-          <svg
-            class="w-5 h-5 text-blue-500"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
+          <a
+            href="/message"
+            class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M16 12H8m0 0l4-4m-4 4l4 4"
-            />
-          </svg>
-          Submit
-        </a>
-        <a
-          href="/browse-message"
-          class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
-        >
-          <svg
-            class="w-5 h-5 text-green-500"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <circle
-              cx="12"
-              cy="12"
-              r="10"
+            <svg
+              class="w-5 h-5 text-blue-500"
+              fill="none"
               stroke="currentColor"
               stroke-width="2"
-              fill="#d1fae5"
-            />
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M8 12h8m-4-4v8"
-            />
-          </svg>
-          Browse
-        </a>
-        <!-- <a
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M16 12H8m0 0l4-4m-4 4l4 4"
+              />
+            </svg>
+            Submit
+          </a>
+          <a
+            href="/browse-message"
+            class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
+          >
+            <svg
+              class="w-5 h-5 text-green-500"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="#d1fae5"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M8 12h8m-4-4v8"
+              />
+            </svg>
+            Browse
+          </a>
+          <!-- <a
           href="#"
           class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
         >
@@ -140,88 +152,88 @@
           </svg>
           Support
         </a> -->
-      </div>
-    </header>
+        </div>
+      </header>
 
-    <!-- Hero -->
-    <section class="text-center py-16">
-      <h2 class="text-3xl md:text-5xl font-handwriting mb-4">
-        spill ur feelings here — <br />
-        let the song do the talking.
-      </h2>
-      <p class="text-gray-600 text-lg mb-8">they’ll get it… maybe.</p>
-    </section>
+      <!-- Hero -->
+      <section class="text-center py-16">
+        <h2 class="text-3xl md:text-5xl font-handwriting mb-4">
+          spill ur feelings here — <br />
+          let the song do the talking.
+        </h2>
+        <p class="text-gray-600 text-lg mb-8">they’ll get it… maybe.</p>
+      </section>
 
-    <!-- section of message cards -->
-    <section class="flex justify-center">
-      <div
-        class="bg-white border shadow-md rounded-[20px] max-w-4xl w-full p-6"
-      >
-        <!-- Search Form -->
-        <form class="mb-8 flex justify-center" id="searchForm">
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="Search by recipient"
-            class="w-full max-w-md px-4 py-2 rounded-l-[12px] border border-gray-300 focus:ring-2 focus:ring-blue-200 focus:outline-none transition"
-          />
-          <button
-            type="submit"
-            class="bg-gradient-to-r from-gray-400 via-gray-700 to-black text-white px-4 py-2 rounded-r-[12px] font-semibold hover:bg-blue-600 transition"
-          >
-            Cari
-          </button>
-        </form>
+      <!-- section of message cards -->
+      <section class="flex justify-center">
         <div
-          id="menfessContainer"
-          class="grid grid-cols-1 md:grid-cols-2 gap-8"
-        ></div>
-      </div>
-    </section>
+          class="bg-white border shadow-md rounded-[20px] max-w-4xl w-full p-6"
+        >
+          <!-- Search Form -->
+          <form class="mb-8 flex justify-center" id="searchForm">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search by recipient"
+              class="w-full max-w-md px-4 py-2 rounded-l-[12px] border border-gray-300 focus:ring-2 focus:ring-blue-200 focus:outline-none transition"
+            />
+            <button
+              type="submit"
+              class="bg-gradient-to-r from-gray-400 via-gray-700 to-black text-white px-4 py-2 rounded-r-[12px] font-semibold hover:bg-blue-600 transition"
+            >
+              Cari
+            </button>
+          </form>
+          <div
+            id="menfessContainer"
+            class="grid grid-cols-1 md:grid-cols-2 gap-8"
+          ></div>
+        </div>
+      </section>
 
-    <footer class="mt-12 py-6 text-center text-gray-400 text-sm">
-      © 2025 FeelDrop. All rights reserved.
-    </footer>
+      <footer class="mt-12 py-6 text-center text-gray-400 text-sm">
+        © 2025 FeelDrop. All rights reserved.
+      </footer>
 
-    <script>
-      // Active state untuk navbar
-      document.addEventListener("DOMContentLoaded", function () {
-        // Untuk desktop
-        document.querySelectorAll("nav a").forEach((link) => {
-          if (link.getAttribute("href") === window.location.pathname) {
-            link.classList.add(
-              "font-bold",
-              "text-black",
-              "border-b-2",
-              "border-black"
-            );
-          }
+      <script>
+        // Active state untuk navbar
+        document.addEventListener("DOMContentLoaded", function () {
+          // Untuk desktop
+          document.querySelectorAll("nav a").forEach((link) => {
+            if (link.getAttribute("href") === window.location.pathname) {
+              link.classList.add(
+                "font-bold",
+                "text-black",
+                "border-b-2",
+                "border-black"
+              );
+            }
+          });
+          // Untuk mobile
+          document.querySelectorAll("#mobileMenu a").forEach((link) => {
+            if (link.getAttribute("href") === window.location.pathname) {
+              link.classList.add("bg-blue-100", "text-blue-700", "font-bold");
+            }
+          });
         });
-        // Untuk mobile
-        document.querySelectorAll("#mobileMenu a").forEach((link) => {
-          if (link.getAttribute("href") === window.location.pathname) {
-            link.classList.add("bg-blue-100", "text-blue-700", "font-bold");
-          }
-        });
-      });
-    </script>
+      </script>
 
-    <script>
-      async function loadMenfess() {
-        try {
-          const res = await fetch("/menfess"); // ✅ GANTI route
-          const data = await res.json();
+      <script>
+        async function loadMenfess() {
+          try {
+            const res = await fetch("/menfess"); // ✅ GANTI route
+            const data = await res.json();
 
-          const container = document.getElementById("menfessContainer");
-          container.innerHTML = ""; // kosongkan sebelum isi
+            const container = document.getElementById("menfessContainer");
+            container.innerHTML = ""; // kosongkan sebelum isi
 
-          data.forEach((item) => {
-            const el = document.createElement("a");
-            el.href = `/menfess/${item._id}`;
-            el.className =
-              "block p-0 border rounded-[20px] shadow-sm overflow-hidden bg-white flex flex-col h-full transition hover:shadow-md hover:bg-gray-50";
+            data.forEach((item) => {
+              const el = document.createElement("a");
+              el.href = `/menfess/${item._id}`;
+              el.className =
+                "block p-0 border rounded-[20px] shadow-sm overflow-hidden bg-white flex flex-col h-full transition hover:shadow-md hover:bg-gray-50";
 
-            el.innerHTML = `
+              el.innerHTML = `
         <div class="p-6 flex-1 flex flex-col">
           <div class="mb-2">
             <span class="block font-semibold text-sm">To: ${item.to}</span>
@@ -250,51 +262,53 @@
         </div>
       `;
 
-            container.appendChild(el);
-          });
-        } catch (err) {
-          console.error("❌ Gagal load menfess:", err);
-        }
-      }
-
-      document.addEventListener("DOMContentLoaded", loadMenfess);
-    </script>
-
-    <script>
-      document
-        .getElementById("searchForm")
-        .addEventListener("submit", async (e) => {
-          e.preventDefault();
-          const query = document.getElementById("searchInput").value.trim();
-
-          const container = document.getElementById("menfessContainer");
-          container.innerHTML = "";
-
-          if (!query) {
-            loadMenfess(); // Kalau input kosong, tampilkan semua lagi
-            return;
+              container.appendChild(el);
+            });
+          } catch (err) {
+            console.error("❌ Gagal load menfess:", err);
           }
+        }
 
-          try {
-            const res = await fetch(`/search?to=${encodeURIComponent(query)}`);
-            const data = await res.json();
+        document.addEventListener("DOMContentLoaded", loadMenfess);
+      </script>
 
-            if (data.length === 0) {
-              container.innerHTML = `
+      <script>
+        document
+          .getElementById("searchForm")
+          .addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const query = document.getElementById("searchInput").value.trim();
+
+            const container = document.getElementById("menfessContainer");
+            container.innerHTML = "";
+
+            if (!query) {
+              loadMenfess(); // Kalau input kosong, tampilkan semua lagi
+              return;
+            }
+
+            try {
+              const res = await fetch(
+                `/search?to=${encodeURIComponent(query)}`
+              );
+              const data = await res.json();
+
+              if (data.length === 0) {
+                container.innerHTML = `
             <div class="text-center text-gray-500 w-full col-span-2 py-10">
               No messages found for that recipient.
             </div>
           `;
-              return;
-            }
+                return;
+              }
 
-            data.forEach((item) => {
-              const el = document.createElement("a");
-              el.href = `/menfess/${item._id}`;
-              el.className =
-                "block p-0 border rounded-[20px] shadow-sm overflow-hidden bg-white flex flex-col h-full transition hover:shadow-md hover:bg-gray-50";
+              data.forEach((item) => {
+                const el = document.createElement("a");
+                el.href = `/menfess/${item._id}`;
+                el.className =
+                  "block p-0 border rounded-[20px] shadow-sm overflow-hidden bg-white flex flex-col h-full transition hover:shadow-md hover:bg-gray-50";
 
-              el.innerHTML = `
+                el.innerHTML = `
             <div class="p-6 flex-1 flex flex-col">
               <div class="mb-2">
                 <span class="block font-semibold text-sm">To: ${item.to}</span>
@@ -323,51 +337,52 @@
             </div>
           `;
 
-              container.appendChild(el);
-            });
-          } catch (err) {
-            console.error("Search error:", err);
-            container.innerHTML = `
+                container.appendChild(el);
+              });
+            } catch (err) {
+              console.error("Search error:", err);
+              container.innerHTML = `
           <div class="text-center text-red-500 w-full col-span-2 py-10">
             An error occurred while searching. Please try again later.
           </div>
         `;
-          }
+            }
+          });
+      </script>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const menuToggle = document.getElementById("menuToggle");
+          const mobileMenu = document.getElementById("mobileMenu");
+
+          menuToggle.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+            menuToggle.classList.toggle("is-active");
+          });
         });
-    </script>
+      </script>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const menuToggle = document.getElementById("menuToggle");
-        const mobileMenu = document.getElementById("mobileMenu");
+      <style>
+        .font-handwriting {
+          font-family: "Patrick Hand", cursive;
+        }
+        /* Resize hamburger icon */
+        .hamburger {
+          transform: scale(0.75); /* Atur ukuran: 0.75 = 75% */
+          transform-origin: center;
+          margin: 0;
+          padding: 0;
+          line-height: 1;
+        }
 
-        menuToggle.addEventListener("click", () => {
-          mobileMenu.classList.toggle("hidden");
-          menuToggle.classList.toggle("is-active");
-        });
-      });
-    </script>
-
-    <style>
-      .font-handwriting {
-        font-family: "Patrick Hand", cursive;
-      }
-      /* Resize hamburger icon */
-      .hamburger {
-        transform: scale(0.75); /* Atur ukuran: 0.75 = 75% */
-        transform-origin: center;
-        margin: 0;
-        padding: 0;
-        line-height: 1;
-      }
-
-      #mobileMenu {
-        transition: all 0.3s ease-in-out;
-      }
-    </style>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap"
-    />
+        #mobileMenu {
+          transition: all 0.3s ease-in-out;
+        }
+      </style>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap"
+      />
+    </div>
   </body>
 </html>

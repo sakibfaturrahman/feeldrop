@@ -16,512 +16,540 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   </head>
-  <body class="bg-white text-gray-800">
-    <!-- Header -->
-    <header class="border-b border-black bg-white sticky top-0 z-40">
-      <div
-        class="flex justify-between items-center max-w-3xl mx-auto px-4 py-4"
+  <body class="relative min-h-screen bg-gray-100 overflow-x-hidden">
+    <div class="absolute inset-0 w-full h-full pointer-events-none z-0">
+      <svg
+        class="w-full h-full"
+        viewBox="0 0 1440 900"
+        fill="none"
+        preserveAspectRatio="none"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <a href="/" class="text-xl font-handwriting">FeelDrop</a>
-
-        <!-- Hamburger Button -->
-        <button
-          id="menuToggle"
-          class="hamburger hamburger--elastic sm:hidden"
-          type="button"
+        <rect width="1440" height="900" fill="#f3f4f6" />
+        <path d="M0,400 Q360,500 720,400 T1440,400 V900 H0 Z" fill="#fff" />
+      </svg>
+    </div>
+    <div class="relative z-10">
+      <!-- Header -->
+      <header class="border-b border-black bg-white sticky top-0 z-40">
+        <div
+          class="flex justify-between items-center max-w-3xl mx-auto px-4 py-4"
         >
-          <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-          </span>
-        </button>
+          <a href="/" class="text-xl font-handwriting">FeelDrop</a>
 
-        <!-- Desktop Navigation -->
-        <nav class="hidden sm:flex gap-6 text-sm">
-          <a href="/message" class="py-1">Submit</a>
-          <a href="/browse-message" class="py-1">Browse</a>
-          <a href="#" class="py-1">History</a>
-          <a href="#" class="py-1">Support</a>
-        </nav>
-      </div>
-
-      <!-- Mobile Menu -->
-      <div
-        id="mobileMenu"
-        class="sm:hidden px-4 pb-4 flex-col gap-2 text-sm hidden transition-all"
-      >
-        <a
-          href="/message"
-          class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
-        >
-          <svg
-            class="w-5 h-5 text-blue-500"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M16 12H8m0 0l4-4m-4 4l4 4"
-            />
-          </svg>
-          Submit
-        </a>
-        <a
-          href="/browse-message"
-          class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
-        >
-          <svg
-            class="w-5 h-5 text-green-500"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <circle
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              stroke-width="2"
-              fill="#d1fae5"
-            />
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M8 12h8m-4-4v8"
-            />
-          </svg>
-          Browse
-        </a>
-        <!-- <a
-          href="#"
-          class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
-        >
-          <svg
-            class="w-5 h-5 text-yellow-500"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 8v4l3 3"
-            />
-            <circle
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              stroke-width="2"
-              fill="#fef9c3"
-            />
-          </svg>
-          History
-        </a>
-        <a
-          href="#"
-          class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
-        >
-          <svg
-            class="w-5 h-5 text-pink-500"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M18.364 5.636l-1.414 1.414A7.975 7.975 0 0012 4a7.975 7.975 0 00-4.95 2.05l-1.414-1.414A9.969 9.969 0 0112 2c2.761 0 5.261 1.12 7.071 2.929z"
-            />
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M2 12c0-2.761 1.12-5.261 2.929-7.071l1.414 1.414A7.975 7.975 0 004 12c0 2.209.896 4.209 2.343 5.657l-1.414 1.414A9.969 9.969 0 012 12z"
-            />
-          </svg>
-          Support
-        </a> -->
-      </div>
-    </header>
-
-    <!-- Hero -->
-    <section class="text-center py-16">
-      <h2 class="text-3xl md:text-5xl font-handwriting mb-4">
-        spill ur feelings here — <br />
-        let the song do the talking.
-      </h2>
-      <p class="text-gray-600 text-lg mb-8">they’ll get it… maybe.</p>
-    </section>
-
-    <!-- message cards -->
-    <section class="flex justify-center">
-      <div
-        class="bg-white border shadow-lg rounded-[24px] max-w-xl w-full p-8 mt-4"
-      >
-        <h3 class="font-handwriting text-2xl text-center mb-6 text-gray-800">
-          Send ur message secret with song 🎵
-        </h3>
-        <form id="formMenfess" class="space-y-5">
-          <div>
-            <label
-              class="block text-sm font-medium text-gray-700 mb-1"
-              for="to"
-            >
-              To
-            </label>
-            <input
-              id="to"
-              name="to"
-              type="text"
-              placeholder="Enter recipient's name"
-              class="w-full px-4 py-2 rounded-[12px] border border-gray-300 focus:ring-2 focus:ring-blue-200 focus:outline-none transition"
-            />
-          </div>
-          <div>
-            <label
-              class="block text-sm font-medium text-gray-700 mb-1"
-              for="message"
-            >
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows="3"
-              placeholder="Write your message here"
-              class="w-full px-4 py-2 rounded-[12px] border border-gray-300 focus:ring-2 focus:ring-blue-200 focus:outline-none transition resize-none"
-            ></textarea>
-          </div>
-          <div>
-            <label
-              class="block text-sm font-medium text-gray-700 mb-1"
-              for="song"
-            >
-              Lagu
-            </label>
-            <select
-              id="song"
-              name="song"
-              class="select-song w-full px-4 py-2 rounded-[12px] border border-gray-300 focus:ring-2 focus:ring-blue-200 focus:outline-none transition bg-white"
-            >
-              <option value="">Search Song</option>
-            </select>
-          </div>
+          <!-- Hamburger Button -->
           <button
-            type="submit"
-            class="w-full bg-gradient-to-r from-gray-400 via-gray-700 to-black text-white font-semibold py-2 rounded-[12px] shadow hover:from-gray-500 hover:to-black transition"
+            id="menuToggle"
+            class="hamburger hamburger--elastic sm:hidden"
+            type="button"
           >
-            Kirim Pesan
+            <span class="hamburger-box">
+              <span class="hamburger-inner"></span>
+            </span>
           </button>
-        </form>
-      </div>
-    </section>
 
-    <footer class="mt-12 py-6 text-center text-gray-400 text-sm">
-      © 2025 FeelDrop. All rights reserved.
-    </footer>
+          <!-- Desktop Navigation -->
+          <nav class="hidden sm:flex gap-6 text-sm">
+            <a href="/message" class="py-1">Submit</a>
+            <a href="/browse-message" class="py-1">Browse</a>
+            <!-- <a href="#" class="py-1">History</a>
+            <a href="#" class="py-1">Support</a> -->
+          </nav>
+        </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const menuToggle = document.getElementById("menuToggle");
-        const mobileMenu = document.getElementById("mobileMenu");
+        <!-- Mobile Menu -->
+        <div
+          id="mobileMenu"
+          class="sm:hidden px-4 pb-4 flex-col gap-2 text-sm hidden transition-all"
+        >
+          <a
+            href="/message"
+            class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
+          >
+            <svg
+              class="w-5 h-5 text-blue-500"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M16 12H8m0 0l4-4m-4 4l4 4"
+              />
+            </svg>
+            Submit
+          </a>
+          <a
+            href="/browse-message"
+            class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
+          >
+            <svg
+              class="w-5 h-5 text-green-500"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="#d1fae5"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M8 12h8m-4-4v8"
+              />
+            </svg>
+            Browse
+          </a>
+          <!-- <a
+            href="#"
+            class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
+          >
+            <svg
+              class="w-5 h-5 text-yellow-500"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 8v4l3 3"
+              />
+              <circle
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="#fef9c3"
+              />
+            </svg>
+            History
+          </a>
+          <a
+            href="#"
+            class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition font-medium text-gray-800"
+          >
+            <svg
+              class="w-5 h-5 text-pink-500"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M18.364 5.636l-1.414 1.414A7.975 7.975 0 0012 4a7.975 7.975 0 00-4.95 2.05l-1.414-1.414A9.969 9.969 0 0112 2c2.761 0 5.261 1.12 7.071 2.929z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2 12c0-2.761 1.12-5.261 2.929-7.071l1.414 1.414A7.975 7.975 0 004 12c0 2.209.896 4.209 2.343 5.657l-1.414 1.414A9.969 9.969 0 012 12z"
+              />
+            </svg>
+            Support
+          </a> -->
+        </div>
+      </header>
 
-        menuToggle.addEventListener("click", () => {
-          mobileMenu.classList.toggle("hidden");
-          menuToggle.classList.toggle("is-active");
-        });
-      });
-    </script>
+      <!-- Hero -->
+      <section class="text-center py-16">
+        <h2 class="text-3xl md:text-5xl font-handwriting mb-4">
+          spill ur feelings here — <br />
+          let the song do the talking.
+        </h2>
+        <p class="text-gray-600 text-lg mb-8">they’ll get it… maybe.</p>
+      </section>
 
-    <style>
-      /* costum alert */
-      @keyframes fade-in-down {
-        0% {
-          opacity: 0;
-          transform: translateY(-20px) scale(0.98);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-      }
-      .animate-fade-in-down {
-        animation: fade-in-down 0.5s cubic-bezier(0.4, 2, 0.6, 1) both;
-      }
-      .font-handwriting {
-        font-family: "Patrick Hand", cursive;
-      }
-      .font-handwriting {
-        font-family: "Patrick Hand", cursive;
-      }
-
-      /* Select2 custom style */
-      .select2-container--default .select2-selection--single {
-        border-radius: 12px !important;
-        border-color: #d1d5db !important; /* Tailwind gray-300 */
-        height: 44px !important;
-        padding: 6px 12px !important;
-        font-size: 1rem;
-        background: #fff;
-        transition: border 0.2s;
-        box-shadow: none;
-      }
-      .select2-container--default .select2-selection--single:focus,
-      .select2-container--default
-        .select2-selection--single.select2-selection--focus {
-        border-color: #60a5fa !important; /* Tailwind blue-400 */
-        outline: none;
-        box-shadow: 0 0 0 2px #bfdbfe;
-      }
-      .select2-container--default
-        .select2-selection--single
-        .select2-selection__rendered {
-        color: #374151; /* Tailwind gray-700 */
-        line-height: 30px;
-        padding-left: 0;
-      }
-      .select2-container--default
-        .select2-selection--single
-        .select2-selection__arrow {
-        height: 44px !important;
-        right: 10px;
-      }
-      .select2-dropdown {
-        border-radius: 12px !important;
-        border-color: #d1d5db !important;
-        font-size: 1rem;
-        box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.08);
-        padding-top: 8px;
-        padding-bottom: 8px;
-      }
-      .select2-results__option {
-        padding: 10px 16px;
-        border-radius: 8px;
-        transition: background 0.15s;
-      }
-      .select2-results__option--highlighted {
-        background-color: #e0e7ff !important; /* Tailwind indigo-100 */
-        color: #3730a3 !important; /* Tailwind indigo-800 */
-      }
-      .select2-container--default
-        .select2-selection--single
-        .select2-selection__placeholder {
-        color: #9ca3af; /* Tailwind gray-400 */
-      }
-
-      /* Custom style for Select2 search input */
-      .select2-container .select2-search--dropdown .select2-search__field {
-        border-radius: 8px;
-        border: 1px solid #d1d5db;
-        padding: 8px 12px;
-        font-size: 1rem;
-        outline: none;
-        transition: border 0.2s;
-        margin-bottom: 8px;
-        color: #374151;
-        background: #f9fafb;
-      }
-      .select2-container
-        .select2-search--dropdown
-        .select2-search__field:focus {
-        border-color: #60a5fa;
-        background: #fff;
-      }
-    </style>
-    <style>
-      @keyframes fade-in-down {
-        0% {
-          opacity: 0;
-          transform: translateY(-20px) scale(0.98);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-      }
-      .animate-fade-in-down {
-        animation: fade-in-down 0.5s cubic-bezier(0.4, 2, 0.6, 1) both;
-      }
-      .font-handwriting {
-        font-family: "Patrick Hand", cursive;
-      }
-      /* Resize hamburger icon */
-      .hamburger {
-        transform: scale(0.75); /* Atur ukuran: 0.75 = 75% */
-        transform-origin: center;
-        margin: 0;
-        padding: 0;
-        line-height: 1;
-      }
-
-      #mobileMenu {
-        transition: all 0.3s ease-in-out;
-      }
-    </style>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap"
-    />
-
-    <script>
-      // Active state untuk navbar
-      document.addEventListener("DOMContentLoaded", function () {
-        // Untuk desktop
-        document.querySelectorAll("nav a").forEach((link) => {
-          if (link.getAttribute("href") === window.location.pathname) {
-            link.classList.add(
-              "font-bold",
-              "text-black",
-              "border-b-2",
-              "border-black"
-            );
-          }
-        });
-        // Untuk mobile
-        document.querySelectorAll("#mobileMenu a").forEach((link) => {
-          if (link.getAttribute("href") === window.location.pathname) {
-            link.classList.add("bg-blue-100", "text-blue-700", "font-bold");
-          }
-        });
-      });
-    </script>
-
-    <script>
-      document
-        .getElementById("formMenfess")
-        .addEventListener("submit", async (e) => {
-          e.preventDefault();
-
-          const form = e.target;
-          const formData = {
-            to: form.to.value,
-            message: form.message.value,
-            song: form.song.value,
-          };
-
-          try {
-            const res = await fetch("/kirim", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(formData),
-            });
-
-            if (res.ok) {
-              showSuccessAlert();
-              form.reset(); // kosongkan form setelah kirim
-            } else {
-              showErrorAlert("Pesan gagal dikirim. Silakan coba lagi.");
-            }
-          } catch (err) {
-            console.error(err);
-            showErrorAlert("Opps, Terjadi kesalahan! Silakan coba lagi.");
-          }
-        });
-
-      function showSuccessAlert() {
-        const alertHTML = `
-          <div id="notif-alert" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95vw] max-w-xs sm:max-w-md">
-            <div class="flex items-center gap-3 px-4 sm:px-6 py-4 rounded-xl shadow-lg bg-white border border-blue-200 animate-fade-in-down">
-              <svg class="w-6 h-6 text-blue-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="#dbeafe" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01" />
-              </svg>
-              <div class="flex-1 min-w-0">
-                <span class="block font-semibold text-blue-700 text-base">Berhasil!</span>
-                <span class="block text-gray-600 text-sm break-words">Pesan kamu sudah terkirim 🎉</span>
-              </div>
-              <button onclick="document.getElementById('notif-alert').remove()" class="ml-2 sm:ml-4 text-gray-400 hover:text-blue-500 transition">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
+      <!-- message cards -->
+      <section class="flex justify-center">
+        <div
+          class="bg-white border shadow-lg rounded-[24px] max-w-xl w-full p-8 mt-4"
+        >
+          <h3 class="font-handwriting text-2xl text-center mb-6 text-gray-800">
+            Send ur message secret with song 🎵
+          </h3>
+          <form id="formMenfess" class="space-y-5 relative">
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 mb-1"
+                for="to"
+              >
+                To
+              </label>
+              <input
+                id="to"
+                name="to"
+                type="text"
+                placeholder="Enter recipient's name"
+                class="w-full px-4 py-2 rounded-[12px] border border-gray-300 focus:ring-2 focus:ring-blue-200 focus:outline-none transition"
+              />
             </div>
-          </div>
-        `;
-        document.body.insertAdjacentHTML("beforeend", alertHTML);
-
-        setTimeout(() => {
-          window.location.href = "/";
-        }, 5000);
-      }
-
-      function showErrorAlert(
-        message = "Pesan gagal dikirim. Silakan coba lagi."
-      ) {
-        const alertHTML = `
-          <div id="notif-alert" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95vw] max-w-xs sm:max-w-md">
-            <div class="flex items-center gap-3 px-4 sm:px-6 py-4 rounded-xl shadow-lg bg-white border border-gray-300 animate-fade-in-down">
-              <svg class="w-6 h-6 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="#fee2e2" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01" />
-              </svg>
-              <div class="flex-1 min-w-0">
-                <span class="block font-semibold text-red-700 text-base">Gagal!</span>
-                <span class="block text-gray-600 text-sm break-words">${message}</span>
-              </div>
-              <button onclick="document.getElementById('notif-alert').remove()" class="ml-2 sm:ml-4 text-gray-400 hover:text-red-500 transition">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 mb-1"
+                for="message"
+              >
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows="3"
+                placeholder="Write your message here"
+                class="w-full px-4 py-2 rounded-[12px] border border-gray-300 focus:ring-2 focus:ring-blue-200 focus:outline-none transition resize-none"
+              ></textarea>
             </div>
-          </div>
-        `;
-        document.body.insertAdjacentHTML("beforeend", alertHTML);
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 mb-1"
+                for="song"
+              >
+                Lagu
+              </label>
+              <select
+                id="song"
+                name="song"
+                class="select-song w-full px-4 py-2 rounded-[12px] border border-gray-300 focus:ring-2 focus:ring-blue-200 focus:outline-none transition bg-white"
+              >
+                <option value="" disabled selected>
+                  Select a song or search
+                </option>
+              </select>
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-gradient-to-r from-gray-400 via-gray-700 to-black text-white font-semibold py-2 rounded-[12px] shadow hover:from-gray-500 hover:to-black transition"
+            >
+              Kirim Pesan
+            </button>
+          </form>
+        </div>
+      </section>
 
-        setTimeout(() => {
-          const notif = document.getElementById("notif-alert");
-          if (notif) notif.remove();
-        }, 5000);
-      }
-    </script>
+      <footer class="mt-12 py-6 text-center text-gray-400 text-sm">
+        © 2025 FeelDrop. All rights reserved.
+      </footer>
 
-    <script>
-      $(document).ready(function () {
-        // Step 1: Dapatkan dan tampilkan rekomendasi awal
-        $.get("/spotify/recommendations", function (data) {
-          data.results.forEach(function (song) {
-            const option = new Option(song.text, song.id, false, false);
-            $("#song").append(option);
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const menuToggle = document.getElementById("menuToggle");
+          const mobileMenu = document.getElementById("mobileMenu");
+
+          menuToggle.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+            menuToggle.classList.toggle("is-active");
           });
         });
+      </script>
 
-        // Step 2: Inisialisasi Select2 dengan pencarian AJAX
-        $(".select-song").select2({
-          placeholder: "Search Song",
-          allowClear: true,
-          width: "100%",
-          minimumInputLength: 0,
-          ajax: {
-            url: "/spotify/search",
-            dataType: "json",
-            delay: 250,
-            data: function (params) {
-              return { q: params.term };
-            },
-            processResults: function (data) {
-              return {
-                results: data.results,
-              };
-            },
-            cache: true,
-          },
+      <style>
+        /* costum alert */
+        @keyframes fade-in-down {
+          0% {
+            opacity: 0;
+            transform: translateY(-20px) scale(0.98);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+        .animate-fade-in-down {
+          animation: fade-in-down 0.5s cubic-bezier(0.4, 2, 0.6, 1) both;
+        }
+        .font-handwriting {
+          font-family: "Patrick Hand", cursive;
+        }
+
+        /* Select2 custom style */
+        .select2-container--default .select2-selection--single {
+          border-radius: 12px !important;
+          border-color: #d1d5db !important; /* Tailwind gray-300 */
+          height: 44px !important;
+          padding: 6px 12px !important;
+          font-size: 1rem;
+          background: #fff;
+          transition: border 0.2s;
+          box-shadow: none;
+        }
+        .select2-container--default .select2-selection--single:focus,
+        .select2-container--default
+          .select2-selection--single.select2-selection--focus {
+          border-color: #60a5fa !important; /* Tailwind blue-400 */
+          outline: none;
+          box-shadow: 0 0 0 2px #bfdbfe;
+        }
+        .select2-container--default
+          .select2-selection--single
+          .select2-selection__rendered {
+          color: #374151; /* Tailwind gray-700 */
+          line-height: 30px;
+          padding-left: 0;
+        }
+        .select2-container--default
+          .select2-selection--single
+          .select2-selection__arrow {
+          height: 44px !important;
+          right: 10px;
+        }
+        .select2-dropdown {
+          border-radius: 12px !important;
+          border-color: #d1d5db !important;
+          font-size: 1rem;
+          box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.08);
+          padding-top: 8px;
+          padding-bottom: 8px;
+        }
+        .select2-results__option {
+          padding: 10px 16px;
+          border-radius: 8px;
+          transition: background 0.15s;
+        }
+        .select2-results__option--highlighted {
+          background-color: #e0e7ff !important; /* Tailwind indigo-100 */
+          color: #3730a3 !important; /* Tailwind indigo-800 */
+        }
+        .select2-container--default
+          .select2-selection--single
+          .select2-selection__placeholder {
+          color: #9ca3af; /* Tailwind gray-400 */
+        }
+
+        /* Custom style for Select2 search input */
+        .select2-container .select2-search--dropdown .select2-search__field {
+          border-radius: 8px;
+          border: 1px solid #d1d5db;
+          padding: 8px 12px;
+          font-size: 1rem;
+          outline: none;
+          transition: border 0.2s;
+          margin-bottom: 8px;
+          color: #374151;
+          background: #f9fafb;
+        }
+        .select2-container
+          .select2-search--dropdown
+          .select2-search__field:focus {
+          border-color: #60a5fa;
+          background: #fff;
+        }
+
+        @keyframes fade-in-down {
+          0% {
+            opacity: 0;
+            transform: translateY(-20px) scale(0.98);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+        .animate-fade-in-down {
+          animation: fade-in-down 0.5s cubic-bezier(0.4, 2, 0.6, 1) both;
+        }
+        .font-handwriting {
+          font-family: "Patrick Hand", cursive;
+        }
+        /* Resize hamburger icon */
+        .hamburger {
+          transform: scale(0.75); /* Atur ukuran: 0.75 = 75% */
+          transform-origin: center;
+          margin: 0;
+          padding: 0;
+          line-height: 1;
+        }
+
+        #mobileMenu {
+          transition: all 0.3s ease-in-out;
+        }
+      </style>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap"
+      />
+
+      <script>
+        // Active state untuk navbar
+        document.addEventListener("DOMContentLoaded", function () {
+          // Untuk desktop
+          document.querySelectorAll("nav a").forEach((link) => {
+            if (link.getAttribute("href") === window.location.pathname) {
+              link.classList.add(
+                "font-bold",
+                "text-black",
+                "border-b-2",
+                "border-black"
+              );
+            }
+          });
+          // Untuk mobile
+          document.querySelectorAll("#mobileMenu a").forEach((link) => {
+            if (link.getAttribute("href") === window.location.pathname) {
+              link.classList.add("bg-blue-100", "text-blue-700", "font-bold");
+            }
+          });
         });
-      });
-    </script>
+      </script>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const modalHTML = `
+      <script>
+        document
+          .getElementById("formMenfess")
+          .addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const form = e.target;
+            const formData = {
+              to: form.to.value,
+              message: form.message.value,
+              song: form.song.value,
+            };
+
+            try {
+              const res = await fetch("/kirim", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+              });
+
+              if (res.ok) {
+                showSuccessAlert();
+                form.reset(); // kosongkan form setelah kirim
+              } else {
+                const data = await res.json();
+                const errorMessage =
+                  data?.error || "Pesan gagal dikirim. Silakan coba lagi.";
+                showErrorAlert(errorMessage);
+              }
+            } catch (err) {
+              console.error(err);
+              showErrorAlert("Opps, Terjadi kesalahan! Silakan coba lagi.");
+            }
+          });
+
+        function showSuccessAlert() {
+          const alertHTML = `
+      <div id="notif-alert" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95vw] max-w-xs sm:max-w-md">
+        <div class="flex items-center gap-3 px-4 sm:px-6 py-4 rounded-xl shadow-lg bg-white border border-blue-200 animate-fade-in-down">
+          <svg class="w-6 h-6 text-blue-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="#dbeafe" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01" />
+          </svg>
+          <div class="flex-1 min-w-0">
+            <span class="block font-semibold text-blue-700 text-base">Berhasil!</span>
+            <span class="block text-gray-600 text-sm break-words">Pesan kamu sudah terkirim 🎉</span>
+          </div>
+          <button onclick="document.getElementById('notif-alert').remove()" class="ml-2 sm:ml-4 text-gray-400 hover:text-blue-500 transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    `;
+          document.body.insertAdjacentHTML("beforeend", alertHTML);
+
+          setTimeout(() => {
+            window.location.href = "/";
+          }, 5000);
+        }
+
+        function showErrorAlert(
+          message = "Pesan gagal dikirim. Silakan coba lagi."
+        ) {
+          const alertHTML = `
+      <div id="notif-alert" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95vw] max-w-xs sm:max-w-md">
+        <div class="flex items-center gap-3 px-4 sm:px-6 py-4 rounded-xl shadow-lg bg-white border border-gray-300 animate-fade-in-down">
+          <svg class="w-6 h-6 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="#fee2e2" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01" />
+          </svg>
+          <div class="flex-1 min-w-0">
+            <span class="block font-semibold text-red-700 text-base">Gagal!</span>
+            <span class="block text-gray-600 text-sm break-words">${message}</span>
+          </div>
+          <button onclick="document.getElementById('notif-alert').remove()" class="ml-2 sm:ml-4 text-gray-400 hover:text-red-500 transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    `;
+          document.body.insertAdjacentHTML("beforeend", alertHTML);
+
+          setTimeout(() => {
+            const notif = document.getElementById("notif-alert");
+            if (notif) notif.remove();
+          }, 5000);
+        }
+      </script>
+
+      <script>
+        $(document).ready(function () {
+          // Step 1: Tampilkan rekomendasi lagu sebagai opsi awal
+
+          $(".select-song").select2({
+            placeholder: "Select a song or search",
+            allowClear: true,
+            width: "100%",
+            dropdownParent: $("#formMenfess"),
+            dropdownPosition: "below",
+            ajax: {
+              url: "/spotify/search",
+              dataType: "json",
+              delay: 250,
+              data: function (params) {
+                return { q: params.term };
+              },
+              processResults: function (data) {
+                return {
+                  results: data.results,
+                };
+              },
+              cache: true,
+            },
+            templateResult: function (data) {
+              console.log("Select2 Data:", data); // Tambahkan ini
+              if (!data.id) return data.text;
+
+              const cover =
+                data.coverUrl ||
+                data.cover ||
+                "https://placehold.co/40x40?text=♪";
+              return $(`
+            <div class="flex items-center gap-3">
+              <img src="${cover}" class="w-8 h-8 rounded object-cover" alt="cover"/>
+              <span>${data.text}</span>
+            </div>
+          `);
+            },
+
+            templateSelection: function (data) {
+              if (!data.id) return data.text;
+              return data.text;
+            },
+          });
+        });
+      </script>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const modalHTML = `
       <div id="alert-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 animate-fade-in-down relative">
+        <div class="bg-white rounded-2xl shadow-2xl w-[95vw] max-w-xs sm:max-w-md p-4 sm:p-8 animate-fade-in-down relative">
           <div class="flex flex-col items-center text-center">
             <div class="bg-gray-100 rounded-full p-3 mb-4">
               <svg class="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -529,14 +557,18 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01" />
               </svg>
             </div>
-            <h2 class="font-handwriting text-2xl text-gray-700 mb-2">Perhatian!</h2>
-            <p class="text-gray-700 mb-6">
-              Pesan yang sudah <span class="font-semibold text-gray-700">dikirim</span><br>
-              <span class="font-semibold">tidak dapat dihapus</span>.<br>
-              Pastikan isi pesanmu sudah benar sebelum mengirim!
-            </p>
+            <h2 class="font-handwriting text-2xl text-gray-700 mb-2">Attention!</h2>
+            <div class="text-gray-700 mb-6 text-sm sm:text-base break-words leading-relaxed space-y-1">
+              <p>
+                Once your message is <span class="font-semibold text-gray-700">sent</span>,
+                <span class="font-semibold">it cannot be deleted</span>.
+              </p>
+              <p>
+                Please make sure your message is correct before sending!
+              </p>
+            </div>
             <button onclick="document.getElementById('alert-modal').remove()" class="mt-2 px-6 py-2 rounded-lg bg-gray-400 hover:bg-gray-500 text-white font-semibold shadow transition">
-              Saya Mengerti
+               Understand
             </button>
           </div>
           <button onclick="document.getElementById('alert-modal').remove()" class="absolute top-3 right-3 text-gray-400 hover:text-gray-700 transition">
@@ -548,8 +580,9 @@
       </div>
     `;
 
-        document.body.insertAdjacentHTML("beforeend", modalHTML);
-      });
-    </script>
+          document.body.insertAdjacentHTML("beforeend", modalHTML);
+        });
+      </script>
+    </div>
   </body>
 </html>
