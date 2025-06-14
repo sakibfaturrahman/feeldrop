@@ -1,6 +1,6 @@
 # 🎧 Feeldrop
 
-**Feeldrop** adalah aplikasi web sederhana untuk mencurahkan isi hati dan perasaan secara bebas website ini terinspirasi dari <a href"sendthesong.xyz">Sendthesongxyz</a>. Dibuat dengan pendekatan fullstack menggunakan Express.js dan MongoDB di sisi backend, serta HTML dan Tailwind CSS di sisi frontend.
+**Feeldrop** adalah aplikasi web sederhana untuk mencurahkan isi hati dan perasaan secara bebas website ini terinspirasi dari sendthesong.xyz. Dibuat dengan pendekatan fullstack menggunakan Express.js dan MongoDB di sisi backend, serta HTML dan Tailwind CSS di sisi frontend.
 
 
 ## 📝 Fitur Utama
