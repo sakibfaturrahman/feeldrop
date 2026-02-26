@@ -1,9 +1,8 @@
 const path = require("path");
 const Menfess = require("../models/menfess");
-// Pastikan path getSpotifyTrack benar sesuai struktur foldermu
 const { getSpotifyTrack } = require("../data/spotifyData");
 
-// --- Halaman Statis (Tetap dipertahankan untuk backup) ---
+// --- Halaman Statis ---
 exports.halamanUtama = (req, res) => {
   res.sendFile(path.join(__dirname, "..", "views", "main", "index.html"));
 };
@@ -30,7 +29,7 @@ exports.halamanDetailMessage = (req, res) => {
 exports.kirimMenfess = async (req, res) => {
   const { to, message, song } = req.body;
 
-  // 1. Validasi Input (Response dirubah ke JSON)
+  // 1. Validasi Input
   if (!to || !message || !song) {
     return res.status(400).json({
       success: false,
@@ -38,7 +37,7 @@ exports.kirimMenfess = async (req, res) => {
     });
   }
 
-  // 2. Cek Anti-Gambar (Regex tetap sama)
+  // 2. Cek Anti-Gambar
   const containsImageTag = /<img[^>]*>/i.test(message);
   const containsImageURL = /(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))/i.test(
     message,
@@ -61,16 +60,16 @@ exports.kirimMenfess = async (req, res) => {
       song: selectedSong,
     });
 
-    await newMenfess.save();
+    const savedMenfess = await newMenfess.save();
 
-    // 3. Response Sukses Berupa JSON
+    // 3. Response Sukses (Mengirimkan data agar pengirim bisa langsung melihat)
     res.status(201).json({
       success: true,
       message: "message sent successfully",
-      data: newMenfess,
+      data: savedMenfess, // Sertakan data hasil simpan (termasuk _id)
     });
   } catch (err) {
-    console.error("❌ Gagal kirim menfess:", err.response?.data || err);
+    console.error("Gagal kirim menfess:", err.response?.data || err);
     res.status(500).json({
       success: false,
       message: "failed to save message. make sure spotify link is valid.",
@@ -90,10 +89,9 @@ exports.getAllMenfess = async (req, res) => {
       .skip(skip)
       .limit(limit);
 
-    // Kirim dalam bentuk object agar lebih fleksibel
     res.json(data);
   } catch (err) {
-    console.error("❌ Gagal fetch menfess:", err);
+    console.error("Gagal fetch menfess:", err);
     res.status(500).json({ error: "internal server error" });
   }
 };
@@ -104,6 +102,7 @@ exports.LimitMenfess = async (req, res) => {
     const messages = await Menfess.find().sort({ createdAt: -1 }).limit(20);
     res.json(messages);
   } catch (err) {
+    console.error("Gagal fetch limited menfess:", err);
     res.status(500).json({ error: "failed to fetch messages" });
   }
 };
@@ -120,7 +119,7 @@ exports.DetailMenfess = async (req, res) => {
 
     res.json(message);
   } catch (err) {
-    console.error("❌ Gagal fetch detail:", err);
+    console.error("Gagal fetch detail menfess:", err);
     res.status(500).json({ error: "failed to fetch message" });
   }
 };
@@ -140,7 +139,7 @@ exports.searchMenfess = async (req, res) => {
 
     res.json(results);
   } catch (err) {
-    console.error("❌ Gagal mencari menfess:", err);
+    console.error("Gagal mencari menfess:", err);
     res.status(500).json({ error: "error occurred while searching." });
   }
 };
