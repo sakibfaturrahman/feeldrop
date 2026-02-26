@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 
+// Import Controllers & Routes
 const routes = require("./services/routes");
 const spotifyController = require("./services/spotifyController");
 
@@ -11,37 +12,78 @@ const app = express();
 
 // ------------------ Middleware ------------------ //
 
-// Parsing body (form & JSON)
-app.use(cors());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+/**
+ * Konfigurasi CORS yang lebih spesifik agar React
+ * bisa melakukan POST request tanpa hambatan.
+ */
+app.use(
+  cors({
+    origin: "*", // Anda bisa mengganti "*" dengan URL Frontend Vercel Anda
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
 
-// Serving file statis (CSS, JS, gambar, dsb.)
+// Parsing body (Penting untuk menerima data JSON dari React)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Serving file statis (Opsional jika menggunakan arsitektur Decoupled)
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static(path.join(__dirname, "views", "main")));
 
 // ------------------ Routing ------------------ //
 
-// route home aplikasi
+/**
+ * Semua route yang didefinisikan di services/routes.js
+ * akan dapat diakses secara langsung (misal: /menfess, /kirim)
+ */
 app.use("/", routes);
 
-// Routing khusus fitur Spotify
+/**
+ * Route khusus Spotify.
+ * Jika di React Anda memanggil /api/search-song,
+ * pastikan di file routes.js sudah terdaftar.
+ * Baris di bawah ini adalah backup/redundant routing.
+ */
 app.get("/spotify/search", spotifyController.searchSong);
 app.get("/spotify/recommendations", spotifyController.recommendations);
 
 // ------------------ Database ------------------ //
 
-// connect ke MongoDB
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ Terkoneksi ke MongoDB"))
-  .catch((err) => console.error("❌ Gagal koneksi MongoDB:", err));
+/**
+ * Koneksi ke MongoDB.
+ * Pastikan MONGO_URI sudah diatur di Environment Variables Vercel.
+ */
+const connectDB = async () => {
+  try {
+    if (mongoose.connection.readyState === 0) {
+      await mongoose.connect(process.env.MONGO_URI);
+      console.log("connected to mongodb");
+    }
+  } catch (err) {
+    console.error("mongodb connection error:", err.message);
+  }
+};
+
+connectDB();
 
 // ------------------ Server ------------------ //
 
+/**
+ * Port default Vercel adalah dynamic,
+ * namun lokal biasanya menggunakan 3000 atau 5000.
+ */
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server aktif di http://localhost:${PORT}`);
-});
 
-module.exports = app; // Untuk testing
+// Logika ini mencegah server menjalankan app.listen berkali-kali di Vercel
+if (process.env.NODE_ENV !== "production") {
+  app.listen(PORT, () => {
+    console.log(`server active at http://localhost:${PORT}`);
+  });
+}
+
+/**
+ * Penting: Vercel membutuhkan export app untuk
+ * menjalankan Serverless Functions.
+ */
+module.exports = app;
