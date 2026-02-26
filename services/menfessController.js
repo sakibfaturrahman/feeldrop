@@ -1,9 +1,9 @@
 const path = require("path");
 const Menfess = require("../models/menfess");
-const laguList = require("../data/laguList");
+// Pastikan path getSpotifyTrack benar sesuai struktur foldermu
 const { getSpotifyTrack } = require("../data/spotifyData");
 
-// Halaman statis
+// --- Halaman Statis (Tetap dipertahankan untuk backup) ---
 exports.halamanUtama = (req, res) => {
   res.sendFile(path.join(__dirname, "..", "views", "main", "index.html"));
 };
@@ -14,35 +14,45 @@ exports.halamanMessage = (req, res) => {
 
 exports.halamanAllMessage = (req, res) => {
   res.sendFile(
-    path.join(__dirname, "..", "views", "main", "browseMessage.html")
+    path.join(__dirname, "..", "views", "main", "browseMessage.html"),
   );
 };
 
 exports.halamanDetailMessage = (req, res) => {
   res.sendFile(
-    path.join(__dirname, "..", "views", "main", "detailMessage.html")
+    path.join(__dirname, "..", "views", "main", "detailMessage.html"),
   );
 };
+
+// --- API ACTIONS ---
 
 // Kirim pesan menfess dengan spotify track
 exports.kirimMenfess = async (req, res) => {
   const { to, message, song } = req.body;
 
+  // 1. Validasi Input (Response dirubah ke JSON)
   if (!to || !message || !song) {
-    return res.status(400).send("❌ Semua field harus diisi!");
+    return res.status(400).json({
+      success: false,
+      message: "all fields must be filled.",
+    });
   }
 
-  // Cek apakah ada tag gambar atau link ke gambar
+  // 2. Cek Anti-Gambar (Regex tetap sama)
   const containsImageTag = /<img[^>]*>/i.test(message);
   const containsImageURL = /(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))/i.test(
-    message
+    message,
   );
 
   if (containsImageTag || containsImageURL) {
-    return res.status(400).send("❌ Pesan tidak boleh mengandung gambar.");
+    return res.status(400).json({
+      success: false,
+      message: "messages cannot contain images.",
+    });
   }
 
   try {
+    // Ambil data track dari Spotify
     const selectedSong = await getSpotifyTrack(song);
 
     const newMenfess = new Menfess({
@@ -52,40 +62,49 @@ exports.kirimMenfess = async (req, res) => {
     });
 
     await newMenfess.save();
-    res.send('<p>✅ Pesan berhasil dikirim! <a href="/">Kembali</a></p>');
+
+    // 3. Response Sukses Berupa JSON
+    res.status(201).json({
+      success: true,
+      message: "message sent successfully",
+      data: newMenfess,
+    });
   } catch (err) {
     console.error("❌ Gagal kirim menfess:", err.response?.data || err);
-    res.status(500).send("❌ Gagal menyimpan pesan.");
+    res.status(500).json({
+      success: false,
+      message: "failed to save message. make sure spotify link is valid.",
+    });
   }
 };
 
-// Ambil semua menfess dengan pagination (limit 20 per halaman)
+// Ambil semua menfess dengan pagination
 exports.getAllMenfess = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = 20;
   const skip = (page - 1) * limit;
 
-  console.time("getAllMenfess");
   try {
     const data = await Menfess.find()
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit);
-    console.timeEnd("getAllMenfess");
+
+    // Kirim dalam bentuk object agar lebih fleksibel
     res.json(data);
   } catch (err) {
     console.error("❌ Gagal fetch menfess:", err);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "internal server error" });
   }
 };
 
-// Ambil 20 menfess terbaru (tanpa pagination)
+// Ambil 20 menfess terbaru
 exports.LimitMenfess = async (req, res) => {
   try {
     const messages = await Menfess.find().sort({ createdAt: -1 }).limit(20);
     res.json(messages);
   } catch (err) {
-    res.status(500).json({ error: "Failed to fetch messages" });
+    res.status(500).json({ error: "failed to fetch messages" });
   }
 };
 
@@ -96,32 +115,32 @@ exports.DetailMenfess = async (req, res) => {
     const message = await Menfess.findById(id);
 
     if (!message) {
-      return res.status(404).json({ error: "Message not found" });
+      return res.status(404).json({ error: "message not found" });
     }
 
     res.json(message);
   } catch (err) {
-    res.status(500).json({ error: "Failed to fetch message" });
+    console.error("❌ Gagal fetch detail:", err);
+    res.status(500).json({ error: "failed to fetch message" });
   }
 };
 
-// Cari menfess berdasarkan 'to' dengan regex case-insensitive
+// Cari menfess berdasarkan 'to'
 exports.searchMenfess = async (req, res) => {
   const query = req.query.to;
 
   if (!query) {
-    return res.status(400).json({ error: "Parameter 'to' wajib diisi." });
+    return res.status(400).json({ error: "recipient name is required." });
   }
 
-  console.time("searchMenfess");
   try {
     const results = await Menfess.find({
       to: { $regex: query, $options: "i" },
     }).sort({ createdAt: -1 });
-    console.timeEnd("searchMenfess");
+
     res.json(results);
   } catch (err) {
     console.error("❌ Gagal mencari menfess:", err);
-    res.status(500).json({ error: "Terjadi kesalahan saat mencari pesan." });
+    res.status(500).json({ error: "error occurred while searching." });
   }
 };
