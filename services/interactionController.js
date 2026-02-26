@@ -3,7 +3,7 @@ const Menfess = require("../models/menfess");
 // 1. Tambah Komentar atau Balasan
 exports.addComment = async (req, res) => {
   try {
-    const { id } = req.params; // ID Menfess utama
+    const { id } = req.params;
     const { name, content, isSender, replyTo, replyToName } = req.body;
 
     if (!content) {
@@ -21,13 +21,12 @@ exports.addComment = async (req, res) => {
       });
     }
 
-    // Menambahkan komentar baru ke dalam array comments
     message.comments.push({
       name: name || "anonymous",
       content,
       isSender: isSender || false,
-      replyTo: replyTo || null, // ID komentar yang dibalas
-      replyToName: replyToName || null, // Nama yang dibalas (misal: "anonymous")
+      replyTo: replyTo || null,
+      replyToName: replyToName || null,
     });
 
     await message.save();
@@ -46,11 +45,11 @@ exports.addComment = async (req, res) => {
   }
 };
 
-// 2. Reaksi pada Pesan Utama (Message Reaction)
+// 2. Reaksi pada Pesan Utama (Toggle Logic)
 exports.reactMessage = async (req, res) => {
   try {
     const { id } = req.params;
-    const { type } = req.body; // misal: 'heart', 'thumbsup'
+    const { type } = req.body;
 
     const message = await Menfess.findById(id);
     if (!message) {
@@ -60,12 +59,19 @@ exports.reactMessage = async (req, res) => {
       });
     }
 
-    // Cari tipe reaksi di dalam array reactions
     const reactionIndex = message.reactions.findIndex((r) => r.type === type);
 
     if (reactionIndex > -1) {
-      message.reactions[reactionIndex].count += 1;
+      // Logic Toggle: Jika sudah ada dan ditekan lagi, kurangi (unlike)
+      if (message.reactions[reactionIndex].count > 0) {
+        message.reactions[reactionIndex].count -= 1;
+      }
+      // Opsional: Hapus tipe reaksi jika count jadi 0
+      if (message.reactions[reactionIndex].count === 0) {
+        message.reactions.splice(reactionIndex, 1);
+      }
     } else {
+      // Jika belum ada, tambahkan baru
       message.reactions.push({ type, count: 1 });
     }
 
@@ -83,7 +89,7 @@ exports.reactMessage = async (req, res) => {
   }
 };
 
-// 3. Reaksi pada Komentar (Comment Reaction)
+// 3. Reaksi pada Komentar (Toggle Logic)
 exports.reactComment = async (req, res) => {
   try {
     const { messageId, commentId } = req.params;
@@ -97,7 +103,6 @@ exports.reactComment = async (req, res) => {
       });
     }
 
-    // Menggunakan method .id() milik Mongoose untuk mencari sub-document dalam array
     const comment = message.comments.id(commentId);
     if (!comment) {
       return res.status(404).json({
@@ -109,7 +114,13 @@ exports.reactComment = async (req, res) => {
     const reactionIndex = comment.reactions.findIndex((r) => r.type === type);
 
     if (reactionIndex > -1) {
-      comment.reactions[reactionIndex].count += 1;
+      // Logic Toggle untuk komentar
+      if (comment.reactions[reactionIndex].count > 0) {
+        comment.reactions[reactionIndex].count -= 1;
+      }
+      if (comment.reactions[reactionIndex].count === 0) {
+        comment.reactions.splice(reactionIndex, 1);
+      }
     } else {
       comment.reactions.push({ type, count: 1 });
     }
