@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
+const cors = require("cors");
 require("dotenv").config();
 
 const routes = require("./services/routes");
@@ -11,6 +12,7 @@ const app = express();
 // ------------------ Middleware ------------------ //
 
 // Parsing body (form & JSON)
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

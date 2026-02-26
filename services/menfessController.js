@@ -32,6 +32,16 @@ exports.kirimMenfess = async (req, res) => {
     return res.status(400).send("❌ Semua field harus diisi!");
   }
 
+  // Cek apakah ada tag gambar atau link ke gambar
+  const containsImageTag = /<img[^>]*>/i.test(message);
+  const containsImageURL = /(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))/i.test(
+    message
+  );
+
+  if (containsImageTag || containsImageURL) {
+    return res.status(400).send("❌ Pesan tidak boleh mengandung gambar.");
+  }
+
   try {
     const selectedSong = await getSpotifyTrack(song);
 
